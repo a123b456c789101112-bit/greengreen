@@ -45,38 +45,46 @@ if (typeof c.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email) &&
   const copy = el('button', 'tag', c.labels.copy); copy.type = 'button'; copy.addEventListener('click', async () => { try { await navigator.clipboard.writeText(c.email); document.querySelector('#feedback').textContent = c.labels.copied; } catch { document.querySelector('#feedback').textContent = c.labels.copyFailed; } }); emailArea.append(mail, copy);
 } else emailArea.append(el('span', 'tag pending', c.labels.emailPending));
 
-// 自然捲動，不固定畫面；角色進入視窗時輕跳一次。
+// 三張獨立角色卡片，從左至右交錯向上浮現，頁面維持自然捲動。
 (async function setupCharacterStory() {
   const story = c.characterStory;
   const section = document.querySelector('#character-story');
   if (!story || !section) return;
   section.setAttribute('aria-label', story.label);
   section.textContent = story.pending;
-  const stage = el('div', 'character-stage');
-  const illustration = el('div', 'character-illustration');
-  illustration.setAttribute('role', 'img');
-  illustration.setAttribute('aria-label', story.alt);
-  const layers = story.after.map(src => {
-    const image = el('img', 'character-layer'); image.src = src; image.alt = '';
-    illustration.append(image); return image;
+  const stage = el('div', 'character-cards');
+  const images = [];
+  story.cards.forEach((item, index) => {
+    const card = el('article', 'character-card');
+    card.style.setProperty('--entry-delay', (index * 160) + 'ms');
+    card.style.setProperty('--character-color', item.color);
+    const portrait = el('div', 'character-portrait');
+    const crop = el('div', 'character-crop');
+    const [x, y, width, height] = item.crop;
+    crop.style.aspectRatio = width + ' / ' + height;
+    const image = el('img'); image.src = item.image; image.alt = item.name;
+    image.style.width = (item.canvas[0] / width * 100) + '%';
+    image.style.left = (-x / width * 100) + '%';
+    image.style.top = (-y / height * 100) + '%';
+    crop.append(image); portrait.append(crop); images.push(image);
+    card.append(portrait, el('h3', 'character-name', item.name));
+    if (item.description) card.append(el('p', 'character-description', item.description));
+    stage.append(card);
   });
-  stage.append(illustration, el('p', 'character-trait character-dog', story.dog),
-    el('p', 'character-trait character-green', story.green));
-  try { await Promise.all(layers.map(image => image.decode())); }
+  try { await Promise.all(images.map(image => image.decode())); }
   catch { return; }
-  section.replaceChildren(stage); section.classList.add('is-ready');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const observer = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      if (entry.intersectionRatio >= 0.4) {
-        if (!reduced.matches) stage.classList.add('is-bouncing');
-      } else if (!entry.isIntersecting) {
-        stage.classList.remove('is-bouncing');
+  if (!reduced.matches && 'IntersectionObserver' in window) stage.classList.add('can-reveal');
+  section.replaceChildren(stage); section.classList.add('is-ready');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        stage.classList.add('is-visible'); observer.disconnect();
       }
-    }
-  }, { threshold: [0, 0.4] });
-  observer.observe(stage);
+    }, { threshold: 0.3 });
+    observer.observe(stage);
+  }
   reduced.addEventListener('change', () => {
-    if (reduced.matches) stage.classList.remove('is-bouncing');
+    if (reduced.matches) stage.classList.remove('can-reveal');
   });
 })();

@@ -298,15 +298,15 @@ window.CONTENT = {
 
 Object.assign(window.CONTENT, {"navAbout": "認識綠綠", "navCollection": "收藏", "navContact": "打聲招呼 ↗", "heroButton": "看一些綠綠的", "heroNote": "", "coverCaption": "綠綠與棉花狗", "heroBottom": "", "scrollHint": "往下逛逛 ↓", "aboutEyebrow": "HELLO, LITTLE GREEN", "collectionEyebrow": "A LITTLE SOMETHING FOR YOU", "contactEyebrow": "LET’S SAY HELLO", "backTop": "回到頂端 ↑"});
 
-// 角色介紹：只顯示有對話框的版本，進入畫面時以快、慢、快的節奏輕跳。
+// 角色介紹：三個獨立圓形頭貼；crop 是原始透明圖中角色的範圍，不修改原圖。
 window.CONTENT.characterStory = {
-  before: ['assets/IMG_6699.PNG', 'assets/IMG_6700.PNG', 'assets/IMG_6698.PNG'],
-  after: ['assets/IMG_6702.PNG', 'assets/未命名的作品 2.png', 'assets/IMG_6701.PNG'],
-  alt: '左側是棉花狗，右側是綠綠的，後方是吐司',
-  label: '認識棉花狗與綠綠的',
+  label: '認識棉花狗、吐司與綠綠的',
   pending: '角色介紹插畫準備中',
-  dog: '活潑好動',
-  green: '沉穩、安靜'
+  cards: [
+    { name: '棉花狗', description: '活潑好動', image: 'assets/IMG_6700.PNG', crop: [344, 754, 713, 423], canvas: [2500, 1406], color: '#b66c27' },
+    { name: '吐司', description: '', image: 'assets/IMG_6699.PNG', crop: [860, 494, 635, 475], canvas: [2500, 1406], color: '#95652e' },
+    { name: '綠綠的', description: '沉穩、安靜', image: 'assets/IMG_6698.PNG', crop: [1204, 655, 1046, 511], canvas: [2500, 1406], color: '#225b13' }
+  ]
 };
 
 window.CONTENT.labels.avatarDownload = "下載 ↓";

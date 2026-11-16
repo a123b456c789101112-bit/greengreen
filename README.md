@@ -6,7 +6,7 @@
 2. 等候環境啟動；網站會自動啟動並開啟預覽。
 3. 若沒有自動出現，開啟下方 **Ports（連接埠）**，找到 **3000**，按地球圖示 **Open in Browser**。
 4. **Port Visibility 請保持 Private**，只有獲授權並登入 GitHub 的使用者能存取。
-5. 捲動到簡介下方，即可看到角色輕跳：快速跳起、慢速停留、快速落下；頁面正常捲動，不會停住。
+5. 捲動到簡介下方，即可看到三張藍底圓形角色卡片，由左至右交錯向上浮現；頁面正常捲動，不會停住。
 
 Codespaces 可能使用 GitHub 免費額度，超出額度依帳號計費；看完後可到 https://github.com/codespaces 停止環境。
 若網站沒有啟動，在終端機輸入 `bash .devcontainer/start-preview.sh`。
