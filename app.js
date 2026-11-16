@@ -30,7 +30,7 @@ if (typeof c.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email) &&
   const copy = el('button', 'tag', c.labels.copy); copy.type = 'button'; copy.addEventListener('click', async () => { try { await navigator.clipboard.writeText(c.email); document.querySelector('#feedback').textContent = c.labels.copied; } catch { document.querySelector('#feedback').textContent = c.labels.copyFailed; } }); emailArea.append(mail, copy);
 } else emailArea.append(el('span', 'tag pending', c.labels.emailPending));
 
-// 以頁面捲動進度交疊兩張原圖；反向捲動時也能平順返回。
+// 跟隨捲動柔順淡出、淡入；兩個版本不會同時可見。
 (async function setupCharacterStory() {
   const story = c.characterStory;
   const section = document.querySelector('#character-story');
@@ -56,27 +56,42 @@ if (typeof c.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email) &&
   catch { return; } // 原圖尚未上傳時不顯示破圖，也不占用長捲動空間。
   section.replaceChildren(stage); section.classList.add('is-ready');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let queued = false;
-  function update() {
-    queued = false;
+  let frame = 0;
+  let lastTime = 0;
+  let displayed = null;
+  let start = 0;
+  let distance = 1;
+  const clamp = value => Math.min(1, Math.max(0, value));
+  const smooth = value => value * value * (3 - 2 * value);
+  function measure() {
     const top = parseFloat(getComputedStyle(stage).top) || 0;
-    const distance = Math.max(1, section.offsetHeight - stage.offsetHeight - top);
-    const progress = Math.min(1, Math.max(0, (top - section.getBoundingClientRect().top) / distance));
-    const t = Math.min(1, Math.max(0, (progress - 0.12) / 0.68));
-    const eased = reduced.matches ? 1 : t * t * (3 - 2 * t);
-    // 分兩段淡出、淡入；中間保留短暫空隙，兩個版本絕不同時顯示。
-    const outgoing = reduced.matches ? 0 : Math.max(0, 1 - eased / 0.45);
-    const incoming = reduced.matches ? 1 : Math.max(0, (eased - 0.55) / 0.45);
-    before.hidden = outgoing === 0;
-    after.hidden = incoming === 0;
+    start = section.getBoundingClientRect().top + scrollY - top;
+    distance = Math.max(1, section.offsetHeight - stage.offsetHeight - top);
+    schedule();
+  }
+  function update(now) {
+    frame = 0;
+    const target = reduced.matches ? 1 : clamp(((scrollY - start) / distance - 0.12) / 0.68);
+    const elapsed = Math.min(64, lastTime ? now - lastTime : 16);
+    lastTime = now;
+    // 用時間平滑滾輪或觸控的大步跳動，不修改頁面原本的捲動方式。
+    if (displayed === null || reduced.matches) displayed = target;
+    else displayed += (target - displayed) * (1 - Math.exp(-elapsed / 110));
+    if (Math.abs(target - displayed) < 0.0005) displayed = target;
+    // 前半段只淡出，後半段才淡入，不再額外停留空白。
+    const outgoing = 1 - smooth(clamp(displayed * 2));
+    const incoming = smooth(clamp((displayed - 0.5) * 2));
     before.style.opacity = outgoing.toFixed(4);
     after.style.opacity = incoming.toFixed(4);
     stage.style.setProperty('--reveal', incoming.toFixed(4));
-    stage.style.setProperty('--lift', ((1 - eased) * 12).toFixed(2) + 'px');
+    stage.style.setProperty('--lift', ((1 - incoming) * 8).toFixed(2) + 'px');
+    if (displayed !== target) schedule();
+    else lastTime = 0;
   }
-  function schedule() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+  function schedule() { if (!frame) frame = requestAnimationFrame(update); }
   addEventListener('scroll', schedule, { passive: true });
-  addEventListener('resize', schedule);
-  reduced.addEventListener('change', schedule);
-  update();
+  addEventListener('resize', measure);
+  reduced.addEventListener('change', measure);
+  new ResizeObserver(measure).observe(section);
+  measure();
 })();

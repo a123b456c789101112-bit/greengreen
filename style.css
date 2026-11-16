@@ -5,7 +5,7 @@
 #collections{display:block}#collections .cards{grid-template-columns:repeat(3,minmax(0,1fr))}.preview{aspect-ratio:1}.preview.wallpaper{aspect-ratio:1.17}.preview.wallpaper img{width:100%;height:100%;object-fit:contain;border-radius:0;box-shadow:none}.hero-art img{border-radius:18px;aspect-ratio:1.29;object-fit:contain}.hero-bottom{justify-content:flex-end}.category-heading{margin-bottom:8px}
 @media(max-width:700px){#collections .cards{grid-template-columns:1fr}.hero-art img{aspect-ratio:auto}.category{margin-bottom:45px}}
 
-/* 捲動角色介紹：兩張原圖交疊淡化，文字固定在各角色下方。 */
+/* 捲動角色介紹：先淡出再淡入，文字固定在各角色下方。 */
 .character-story{margin:0 6%;color:var(--muted);font-size:13px}
 .character-story.is-ready{height:155vh;min-height:850px;position:relative;margin-top:35px;margin-bottom:35px}
 .character-stage{position:sticky;top:12vh;aspect-ratio:16/9;width:100%;overflow:hidden;border-radius:14px;background:#b3e7df;--reveal:0;--lift:12px}
@@ -19,4 +19,5 @@
 .character-before,.character-after{position:absolute;inset:0}.character-stage{aspect-ratio:2500/1406}
 .character-before{opacity:calc(1 - var(--reveal));will-change:opacity}
 
-.character-stage [hidden]{display:none!important}
+.character-stage{isolation:isolate}
+.character-before,.character-after{pointer-events:none;contain:paint;transform:translateZ(0)}
