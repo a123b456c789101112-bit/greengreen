@@ -43,3 +43,15 @@
 .hero-art::after{content:"";position:absolute;top:0;left:0;right:0;height:42%;background:linear-gradient(to bottom,var(--cream) 0%,rgba(248,247,238,.8) 24%,rgba(248,247,238,0) 100%);pointer-events:none}
 .hero-art img{height:50vh;height:50svh;aspect-ratio:auto;object-fit:cover;border-radius:0;background:var(--cream)}
 @media(max-width:700px){.hero-art{width:100vw;max-width:none;margin-left:calc(50% - 50vw);margin-right:0}.hero-art img{height:50vh;height:50svh}.hero-art figcaption{padding:0 6%}}
+
+/* 桌布按方向分區，卡片隨自然捲動交錯浮現。 */
+.wallpaper-layout-group{margin-bottom:36px}
+#wallpapers .card h5{margin:0;font-size:14px;font-weight:500}
+.card-actions{display:flex;flex-direction:column;align-items:flex-start}
+.card-actions .card-action{min-height:44px;display:inline-flex;align-items:center}
+.hero-art figcaption{display:flex;justify-content:flex-end;align-items:center;gap:14px}
+.hero-art figcaption .card-action{min-height:44px;display:inline-flex;align-items:center;font-size:11px}
+.character-card>.card-action{display:inline-flex;align-items:center;justify-content:center;min-height:44px;font-size:11px}
+.wallpaper-entry{opacity:0;transform:translateY(28px)}
+.wallpaper-entry.is-visible{animation:character-card-enter 720ms cubic-bezier(.22,1,.36,1) var(--entry-delay) both}
+@media(prefers-reduced-motion:reduce){.wallpaper-entry{opacity:1;transform:none;animation:none}}

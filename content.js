@@ -23,7 +23,8 @@ window.CONTENT = {
         "image": "assets/IMG_5110.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 01",
         "download": "assets/IMG_5110.JPG",
-        "colorGroup": "warm"
+        "colorGroup": "warm",
+        "fileName": "IMG_5110.JPG"
       },
       {
         "title": "頭貼 23",
@@ -31,7 +32,8 @@ window.CONTENT = {
         "image": "assets/IMG_5107.JPG",
         "alt": "棉花狗戴著橘色耳罩，深紫色背景的頭貼",
         "download": "assets/IMG_5107.JPG",
-        "colorGroup": "purple"
+        "colorGroup": "purple",
+        "fileName": "IMG_5107.JPG"
       },
       {
         "title": "頭貼 02",
@@ -39,7 +41,8 @@ window.CONTENT = {
         "image": "assets/IMG_5113.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 02",
         "download": "assets/IMG_5113.JPG",
-        "colorGroup": "purple"
+        "colorGroup": "purple",
+        "fileName": "IMG_5113.JPG"
       },
       {
         "title": "頭貼 03",
@@ -47,7 +50,8 @@ window.CONTENT = {
         "image": "assets/IMG_5114.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 03",
         "download": "assets/IMG_5114.JPG",
-        "colorGroup": "warm"
+        "colorGroup": "warm",
+        "fileName": "IMG_5114.JPG"
       },
       {
         "title": "頭貼 04",
@@ -55,7 +59,8 @@ window.CONTENT = {
         "image": "assets/IMG_5115.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 04",
         "download": "assets/IMG_5115.JPG",
-        "colorGroup": "warm"
+        "colorGroup": "warm",
+        "fileName": "IMG_5115.JPG"
       },
       {
         "title": "頭貼 05",
@@ -63,7 +68,8 @@ window.CONTENT = {
         "image": "assets/IMG_5475.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 05",
         "download": "assets/IMG_5475.JPG",
-        "colorGroup": "blue"
+        "colorGroup": "blue",
+        "fileName": "IMG_5475.JPG"
       },
       {
         "title": "頭貼 06",
@@ -71,7 +77,8 @@ window.CONTENT = {
         "image": "assets/IMG_5476.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 06",
         "download": "assets/IMG_5476.JPG",
-        "colorGroup": "blue"
+        "colorGroup": "blue",
+        "fileName": "IMG_5476.JPG"
       },
       {
         "title": "頭貼 07",
@@ -79,7 +86,8 @@ window.CONTENT = {
         "image": "assets/IMG_5477.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 07",
         "download": "assets/IMG_5477.JPG",
-        "colorGroup": "blue"
+        "colorGroup": "blue",
+        "fileName": "IMG_5477.JPG"
       },
       {
         "title": "頭貼 08",
@@ -87,7 +95,8 @@ window.CONTENT = {
         "image": "assets/IMG_5478.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 08",
         "download": "assets/IMG_5478.JPG",
-        "colorGroup": "blue"
+        "colorGroup": "blue",
+        "fileName": "IMG_5478.JPG"
       },
       {
         "title": "頭貼 09",
@@ -95,7 +104,8 @@ window.CONTENT = {
         "image": "assets/IMG_5479.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 09",
         "download": "assets/IMG_5479.JPG",
-        "colorGroup": "blue"
+        "colorGroup": "blue",
+        "fileName": "IMG_5479.JPG"
       },
       {
         "title": "頭貼 10",
@@ -103,7 +113,8 @@ window.CONTENT = {
         "image": "assets/IMG_5481.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 10",
         "download": "assets/IMG_5481.JPG",
-        "colorGroup": "blue"
+        "colorGroup": "blue",
+        "fileName": "IMG_5481.JPG"
       },
       {
         "title": "頭貼 11",
@@ -111,7 +122,8 @@ window.CONTENT = {
         "image": "assets/IMG_5813.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 11",
         "download": "assets/IMG_5813.JPG",
-        "colorGroup": "cream"
+        "colorGroup": "cream",
+        "fileName": "IMG_5813.JPG"
       },
       {
         "title": "頭貼 12",
@@ -119,7 +131,8 @@ window.CONTENT = {
         "image": "assets/IMG_5815.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 12",
         "download": "assets/IMG_5815.JPG",
-        "colorGroup": "cream"
+        "colorGroup": "cream",
+        "fileName": "IMG_5815.JPG"
       },
       {
         "title": "頭貼 13",
@@ -127,7 +140,8 @@ window.CONTENT = {
         "image": "assets/IMG_5973.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 13",
         "download": "assets/IMG_5973.JPG",
-        "colorGroup": "cream"
+        "colorGroup": "cream",
+        "fileName": "IMG_5973.JPG"
       },
       {
         "title": "頭貼 14",
@@ -135,7 +149,8 @@ window.CONTENT = {
         "image": "assets/IMG_5976.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 14",
         "download": "assets/IMG_5976.JPG",
-        "colorGroup": "cream"
+        "colorGroup": "cream",
+        "fileName": "IMG_5976.JPG"
       },
       {
         "title": "頭貼 15",
@@ -143,7 +158,8 @@ window.CONTENT = {
         "image": "assets/IMG_6059.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 15",
         "download": "assets/IMG_6059.JPG",
-        "colorGroup": "cream"
+        "colorGroup": "cream",
+        "fileName": "IMG_6059.JPG"
       },
       {
         "title": "頭貼 16",
@@ -151,7 +167,8 @@ window.CONTENT = {
         "image": "assets/IMG_6060.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 16",
         "download": "assets/IMG_6060.JPG",
-        "colorGroup": "cream"
+        "colorGroup": "cream",
+        "fileName": "IMG_6060.JPG"
       },
       {
         "title": "頭貼 17",
@@ -159,7 +176,8 @@ window.CONTENT = {
         "image": "assets/IMG_6061.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 17",
         "download": "assets/IMG_6061.JPG",
-        "colorGroup": "cream"
+        "colorGroup": "cream",
+        "fileName": "IMG_6061.JPG"
       },
       {
         "title": "頭貼 18",
@@ -167,7 +185,8 @@ window.CONTENT = {
         "image": "assets/IMG_6062.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 18",
         "download": "assets/IMG_6062.JPG",
-        "colorGroup": "cream"
+        "colorGroup": "cream",
+        "fileName": "IMG_6062.JPG"
       },
       {
         "title": "頭貼 19",
@@ -175,7 +194,8 @@ window.CONTENT = {
         "image": "assets/IMG_6063.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 19",
         "download": "assets/IMG_6063.JPG",
-        "colorGroup": "cream"
+        "colorGroup": "cream",
+        "fileName": "IMG_6063.JPG"
       },
       {
         "title": "頭貼 20",
@@ -183,7 +203,8 @@ window.CONTENT = {
         "image": "assets/IMG_6419 2.jpg",
         "alt": "綠綠與棉花狗插畫頭貼 20",
         "download": "assets/IMG_6419 2.jpg",
-        "colorGroup": "yellow"
+        "colorGroup": "yellow",
+        "fileName": "IMG_6419 2.jpg"
       },
       {
         "title": "頭貼 21",
@@ -191,7 +212,8 @@ window.CONTENT = {
         "image": "assets/IMG_6419.jpg",
         "alt": "綠綠與棉花狗插畫頭貼 21",
         "download": "assets/IMG_6419.jpg",
-        "colorGroup": "yellow"
+        "colorGroup": "yellow",
+        "fileName": "IMG_6419.jpg"
       },
       {
         "title": "頭貼 22",
@@ -199,7 +221,8 @@ window.CONTENT = {
         "image": "assets/IMG_6521.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 22",
         "download": "assets/IMG_6521.JPG",
-        "colorGroup": "cream"
+        "colorGroup": "cream",
+        "fileName": "IMG_6521.JPG"
       }
     ],
     "colorGroups": [
@@ -235,35 +258,55 @@ window.CONTENT = {
         "description": "1170 × 2532 · JPG",
         "image": "assets/IMG_4474.JPG",
         "alt": "綠綠與棉花狗插畫桌布 01",
-        "download": "assets/IMG_4474.JPG"
+        "download": "assets/IMG_4474.JPG",
+        "fileName": "IMG_4474.JPG",
+        "layoutGroup": "portrait"
       },
       {
         "title": "桌布 02",
         "description": "1170 × 2532 · JPG",
         "image": "assets/IMG_4475.JPG",
         "alt": "綠綠與棉花狗插畫桌布 02",
-        "download": "assets/IMG_4475.JPG"
+        "download": "assets/IMG_4475.JPG",
+        "fileName": "IMG_4475.JPG",
+        "layoutGroup": "portrait"
       },
       {
         "title": "桌布 03",
         "description": "2048 × 1536 · JPG",
         "image": "assets/IMG_5085.JPG",
         "alt": "綠綠與棉花狗插畫桌布 03",
-        "download": "assets/IMG_5085.JPG"
+        "download": "assets/IMG_5085.JPG",
+        "fileName": "IMG_5085.JPG",
+        "layoutGroup": "landscape"
       },
       {
         "title": "桌布 04",
         "description": "2048 × 1536 · JPG",
         "image": "assets/IMG_5086.JPG",
         "alt": "綠綠與棉花狗插畫桌布 04",
-        "download": "assets/IMG_5086.JPG"
+        "download": "assets/IMG_5086.JPG",
+        "fileName": "IMG_5086.JPG",
+        "layoutGroup": "landscape"
       },
       {
         "title": "桌布 05",
         "description": "1080 × 1920 · JPG",
         "image": "assets/未命名的作品.jpg",
         "alt": "綠綠與棉花狗插畫桌布 05",
-        "download": "assets/未命名的作品.jpg"
+        "download": "assets/未命名的作品.jpg",
+        "fileName": "未命名的作品.jpg",
+        "layoutGroup": "portrait"
+      }
+    ],
+    "layoutGroups": [
+      {
+        "id": "portrait",
+        "title": "直式桌布"
+      },
+      {
+        "id": "landscape",
+        "title": "橫式桌布"
       }
     ]
   },
@@ -277,14 +320,18 @@ window.CONTENT = {
         "description": "LINE 官方商店",
         "image": "assets/stickers-preview-1.jpg",
         "alt": "綠綠的貼圖 1 整組圖案預覽",
-        "storeUrl": "https://store.line.me/stickershop/product/31474161/zh-Hant"
+        "storeUrl": "https://store.line.me/stickershop/product/31474161/zh-Hant",
+        "download": "assets/stickers-preview-1.jpg",
+        "fileName": "stickers-preview-1.jpg"
       },
       {
         "title": "綠綠的貼圖 2",
         "description": "LINE 官方商店",
         "image": "assets/stickers-preview-2.jpg",
         "alt": "綠綠的貼圖 2 整組圖案預覽",
-        "storeUrl": "https://store.line.me/stickershop/product/32869853/zh-Hant"
+        "storeUrl": "https://store.line.me/stickershop/product/32869853/zh-Hant",
+        "download": "assets/stickers-preview-2.jpg",
+        "fileName": "stickers-preview-2.jpg"
       }
     ]
   }
@@ -311,3 +358,12 @@ window.CONTENT.characterStory = {
 
 window.CONTENT.labels.avatarDownload = "下載 ↓";
 window.CONTENT.labels.otherColor = "其他色系";
+
+window.CONTENT.cover.download = window.CONTENT.cover.image;
+window.CONTENT.cover.fileName = 'IMG_5085.JPG';
+for (const character of window.CONTENT.characterStory.cards) {
+  character.download = character.image;
+  character.fileName = character.image.split('/').pop();
+}
+window.CONTENT.labels.downloadOriginal = '下載原圖 ↓';
+window.CONTENT.labels.downloadPreview = '下載預覽圖 ↓';

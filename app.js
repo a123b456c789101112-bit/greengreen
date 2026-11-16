@@ -10,34 +10,76 @@ async function availableFile(path) {
   if (!path) return null;
   try { const url = new URL(path, location.href); if (url.origin !== location.origin || !url.pathname.startsWith(new URL('assets/', location.href).pathname)) return null; const response = await fetch(url, { method: 'HEAD' }); return response.ok ? url.href : null; } catch { return null; }
 }
+async function appendDownload(item, container, label, name) {
+  const url = await availableFile(item.download);
+  if (!url) return;
+  container.querySelector('.pending')?.remove();
+  const link = el('a', 'card-action', label);
+  link.href = url;
+  link.download = item.fileName || item.download.split('/').pop();
+  link.setAttribute('aria-label', label.replace(' ↓', '') + '：' + name);
+  container.append(link);
+}
+appendDownload(c.cover, document.querySelector('.hero-art figcaption'), c.labels.downloadOriginal, c.coverCaption);
 for (const category of c.collections) {
   const section = el('section', 'category'); section.id = category.id;
   const heading = el('div', 'category-heading'); heading.append(el('h3', '', category.title), el('span', '', category.subtitle)); section.append(heading);
   const isAvatar = category.id === 'avatars';
-  const cards = el('div', isAvatar ? 'avatar-groups' : 'cards'); section.append(cards);
+  const isWallpaper = category.id === 'wallpapers';
+  const isGrouped = isAvatar || isWallpaper;
+  const cards = el('div', isAvatar ? 'avatar-groups' : isWallpaper ? 'wallpaper-groups' : 'cards'); section.append(cards);
   const groupedCards = new Map();
   function addGroup(id, title) {
-    const group = el('section', 'avatar-color-group');
+    const group = el('section', isAvatar ? 'avatar-color-group' : 'wallpaper-layout-group');
+    group.dataset.group = id;
     group.append(el('h4', 'color-heading', title));
     const grid = el('div', 'cards'); group.append(grid); cards.append(group);
     groupedCards.set(id, grid);
   }
-  if (isAvatar) for (const group of category.colorGroups || []) {
-    if (category.items.some(item => item.colorGroup === group.id)) addGroup(group.id, group.title);
+  const groupKey = isAvatar ? 'colorGroup' : 'layoutGroup';
+  if (isGrouped) for (const group of (isAvatar ? category.colorGroups : category.layoutGroups) || []) {
+    if (category.items.some(item => item[groupKey] === group.id)) addGroup(group.id, group.title);
   }
-  for (const item of category.items) {
-    const article = el('article', 'card'); const preview = el('div', 'preview ' + (category.id === 'wallpapers' ? 'wallpaper' : category.id === 'stickers' ? 'sticker' : ''));
-    const img = el('img'); img.src = item.image || 'assets/placeholder.svg'; img.alt = item.alt || item.title; img.loading = 'lazy'; img.addEventListener('error', () => { if (!img.src.endsWith('/placeholder.svg')) img.src = 'assets/placeholder.svg'; });
+  category.items.forEach(item => {
+    const article = el('article', 'card');
+    const preview = el('div', 'preview ' + (isWallpaper ? 'wallpaper' : category.id === 'stickers' ? 'sticker' : ''));
+    const img = el('img'); img.src = item.image || 'assets/placeholder.svg'; img.alt = item.alt || item.title; img.loading = 'lazy';
+    img.addEventListener('error', () => { if (!img.src.endsWith('/placeholder.svg')) img.src = 'assets/placeholder.svg'; });
     preview.append(img); if (!item.image || item.image.includes('placeholder.svg')) preview.append(el('span', 'badge', c.labels.placeholder));
-    const info = el('div', 'card-info'); const words = el('div'); words.append(el(isAvatar ? 'h5' : 'h4', '', item.title), el('p', '', item.description)); const action = el('span', 'card-action pending', c.labels.preparing); info.append(words, action); article.append(preview, info);
-    if (isAvatar) {
-      if (!groupedCards.has(item.colorGroup)) addGroup(item.colorGroup, c.labels.otherColor);
-      groupedCards.get(item.colorGroup).append(article);
+    const info = el('div', 'card-info'); const words = el('div');
+    words.append(el(isGrouped ? 'h5' : 'h4', '', item.title), el('p', '', item.description));
+    const actions = el('div', 'card-actions'); actions.append(el('span', 'card-action pending', c.labels.preparing));
+    info.append(words, actions); article.append(preview, info);
+    if (isGrouped) {
+      if (!groupedCards.has(item[groupKey])) addGroup(item[groupKey], c.labels.otherColor);
+      const grid = groupedCards.get(item[groupKey]);
+      if (isWallpaper) article.style.setProperty('--entry-delay', ((grid.children.length % 3) * 130) + 'ms');
+      grid.append(article);
     } else cards.append(article);
-    if (category.id === 'stickers') { const url = webUrl(item.storeUrl); if (url) { const a = el('a', 'card-action', c.labels.store); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; action.replaceWith(a); } }
-    else availableFile(item.download).then(url => { if (url) { const a = el('a', 'card-action', isAvatar ? c.labels.avatarDownload : c.labels.download); a.href = url; a.download = ''; a.setAttribute('aria-label', '下載' + item.title); action.replaceWith(a); } });
-  }
+    if (category.id === 'stickers') {
+      const url = webUrl(item.storeUrl);
+      if (url) {
+        actions.querySelector('.pending').remove();
+        const link = el('a', 'card-action', c.labels.store); link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer'; actions.append(link);
+      }
+    }
+    appendDownload(item, actions, isAvatar ? c.labels.avatarDownload : category.id === 'stickers' ? c.labels.downloadPreview : c.labels.download, item.title);
+  });
   document.querySelector('#collections').append(section);
+}
+// 每張桌布接近視窗才向上浮現，交錯延遲，不固定或攔截捲動。
+const wallpaperMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const wallpaperCards = document.querySelectorAll('#wallpapers .card');
+if (!wallpaperMotion.matches && 'IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible'); observer.unobserve(entry.target);
+    }
+  }, { threshold: 0.12 });
+  wallpaperCards.forEach(card => { card.classList.add('wallpaper-entry'); observer.observe(card); });
+  wallpaperMotion.addEventListener('change', () => {
+    if (wallpaperMotion.matches) { observer.disconnect(); wallpaperCards.forEach(card => card.classList.remove('wallpaper-entry')); }
+  });
 }
 const emailArea = document.querySelector('#email');
 if (typeof c.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email) && !/[\r\n]/.test(c.email)) {
@@ -69,6 +111,7 @@ if (typeof c.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email) &&
     crop.append(image); portrait.append(crop); images.push(image);
     card.append(portrait, el('h3', 'character-name', item.name));
     if (item.description) card.append(el('p', 'character-description', item.description));
+    appendDownload(item, card, c.labels.downloadOriginal, item.name);
     stage.append(card);
   });
   try { await Promise.all(images.map(image => image.decode())); }
