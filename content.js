@@ -7,8 +7,8 @@ window.CONTENT = {
   intro: '歡迎來到綠綠的小角落，\n這裡有綠綠和棉花狗的桌布、頭貼、貼圖',
   cover: { image: 'assets/IMG_5085.JPG', alt: '綠綠與棉花狗一起在水邊休息的插畫' },
   aboutTitle: '你好 我是綠綠的',
-  about: '這裡，是留給綠綠與喜歡綠綠的你的地方。\n一起分享日常的小美好，讓平凡的一天多一點笑容。\n角色的正式介紹準備中，期待很快與你見面。',
-  socials: [{ label: 'Instagram', url: null }, { label: 'Facebook', url: null }],
+  about: '棉花狗、綠綠的和吐司是朋友，常常一起出去玩！希望你能從他們的互動中得到樂趣',
+  socials: [{"label": "Instagram", "url": "https://www.instagram.com/meat628__/"}, {"label": "Threads（脆）", "url": "https://www.threads.com/@meat628__?hl=zh-tw"}],
   collectionTitle: '',
   collectionIntro: '一張頭貼、一幅桌布，或一句貼圖問候。',
   collections: [
@@ -321,8 +321,9 @@ window.CONTENT = {
         "image": "assets/stickers-preview-1.jpg",
         "alt": "綠綠的貼圖 1 整組圖案預覽",
         "storeUrl": "https://store.line.me/stickershop/product/31474161/zh-Hant",
-        "download": "assets/stickers-preview-1.jpg",
-        "fileName": "stickers-preview-1.jpg"
+        "rowCount": 8,
+        "imageWidth": 1080,
+        "imageHeight": 2163
       },
       {
         "title": "綠綠的貼圖 2",
@@ -330,8 +331,9 @@ window.CONTENT = {
         "image": "assets/stickers-preview-2.jpg",
         "alt": "綠綠的貼圖 2 整組圖案預覽",
         "storeUrl": "https://store.line.me/stickershop/product/32869853/zh-Hant",
-        "download": "assets/stickers-preview-2.jpg",
-        "fileName": "stickers-preview-2.jpg"
+        "rowCount": 10,
+        "imageWidth": 1079,
+        "imageHeight": 2734
       }
     ]
   }
@@ -359,11 +361,5 @@ window.CONTENT.characterStory = {
 window.CONTENT.labels.avatarDownload = "下載 ↓";
 window.CONTENT.labels.otherColor = "其他色系";
 
-window.CONTENT.cover.download = window.CONTENT.cover.image;
-window.CONTENT.cover.fileName = 'IMG_5085.JPG';
-for (const character of window.CONTENT.characterStory.cards) {
-  character.download = character.image;
-  character.fileName = character.image.split('/').pop();
-}
 window.CONTENT.labels.downloadOriginal = '下載原圖 ↓';
 window.CONTENT.labels.downloadPreview = '下載預覽圖 ↓';
