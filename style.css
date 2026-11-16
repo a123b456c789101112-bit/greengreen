@@ -75,3 +75,11 @@
 #socials a.tag:hover,#stickers .store-button:hover{filter:brightness(.95);text-decoration:none}
 #stickers .card-info{align-items:center}
 @media(max-width:700px){.about{grid-template-columns:1fr}.header .brand{font-size:17px}#stickers .card-info{display:block}#stickers .card-actions{margin-top:12px}#stickers .store-button{width:100%;min-height:50px}}
+
+/* 簡化介紹裝飾，素材區改用清楚的大標題與淡綠粗體分類。 */
+.about{display:block}
+.about>div{max-width:760px}
+.collection .section-heading h2{font-weight:600;margin-bottom:10px}
+.tabs a,.category-heading h3{font-weight:700;color:#5c7555}
+.tabs span{font-weight:400}
+.hero-bottom{min-height:1px}
