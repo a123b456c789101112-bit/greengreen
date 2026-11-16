@@ -4,13 +4,13 @@ window.CONTENT = {
   brand: '綠綠的網站',
   eyebrow: '',
   title: '',
-  intro: '歡迎來到綠綠的小角落，\n這裡有綠綠和棉花狗的桌布、頭貼、貼圖',
+  intro: '早安早安\n這裡有綠綠和棉花狗的桌布、頭貼、貼圖',
   cover: { image: 'assets/IMG_5085.JPG', alt: '綠綠與棉花狗一起在水邊休息的插畫' },
-  aboutTitle: '你好 我是綠綠的',
+  aboutTitle: '你好，這是我家綠綠的',
   about: '棉花狗、綠綠的和吐司是朋友，常常一起出去玩！希望你能從他們的互動中得到樂趣',
-  socials: [{"label": "照片社群", "url": "https://www.instagram.com/meat628__/"}, {"label": "脆", "url": "https://www.threads.com/@meat628__?hl=zh-tw"}],
-  collectionTitle: '',
-  collectionIntro: '一張頭貼、一幅桌布，或一句貼圖問候。',
+  socials: [{"label": "ig", "url": "https://www.instagram.com/meat628__/"}, {"label": "脆", "url": "https://www.threads.com/@meat628__?hl=zh-tw"}],
+  collectionTitle: '綠綠的寫真，歡迎領取',
+  collectionIntro: '',
   collections: [
   {
     "id": "avatars",
@@ -345,7 +345,7 @@ window.CONTENT = {
   labels: { preparing: '準備中', placeholder: '佔位示意・非正式素材', download: '下載素材 ↓', store: '前往官方商店 ↗', emailPending: '聯絡信箱準備中', copy: '複製信箱', copied: '信箱已複製！', copyFailed: '無法自動複製，請選取上方信箱複製。' }
 };
 
-Object.assign(window.CONTENT, {"navAbout": "認識綠綠", "navCollection": "", "navContact": "打聲招呼 ↗", "heroButton": "頭貼挑看選看喔", "heroNote": "", "coverCaption": "綠綠與棉花狗", "heroBottom": "", "scrollHint": "往下逛逛 ↓", "aboutEyebrow": "", "collectionEyebrow": "", "contactEyebrow": "", "backTop": "回到頂端 ↑"});
+Object.assign(window.CONTENT, {"navAbout": "認識綠綠", "navCollection": "", "navContact": "打聲招呼 ↗", "heroButton": "頭貼挑看選看喔", "heroNote": "", "coverCaption": "", "heroBottom": "", "scrollHint": "", "aboutEyebrow": "", "collectionEyebrow": "", "contactEyebrow": "", "backTop": "回到頂端 ↑"});
 
 // 角色介紹：三個獨立圓形頭貼；crop 是原始透明圖中角色的範圍，不修改原圖。
 window.CONTENT.characterStory = {
@@ -353,7 +353,7 @@ window.CONTENT.characterStory = {
   pending: '角色介紹插畫準備中',
   cards: [
     { name: '棉花狗', description: '活潑好動', image: 'assets/IMG_6700.PNG', crop: [344, 754, 713, 423], canvas: [2500, 1406], color: '#b66c27' },
-    { name: '吐司', description: '', image: 'assets/IMG_6699.PNG', crop: [860, 494, 635, 475], canvas: [2500, 1406], color: '#95652e' },
+    { name: '吐司', description: '普通的吐司', image: 'assets/IMG_6699.PNG', crop: [860, 494, 635, 475], canvas: [2500, 1406], color: '#95652e' },
     { name: '綠綠的', description: '沉穩、安靜', image: 'assets/IMG_6698.PNG', crop: [1204, 655, 1046, 511], canvas: [2500, 1406], color: '#225b13' }
   ]
 };
