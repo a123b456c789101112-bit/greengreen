@@ -6,27 +6,20 @@
 #collections{display:block}#collections .cards{grid-template-columns:repeat(3,minmax(0,1fr))}.preview{aspect-ratio:1}.preview.wallpaper{aspect-ratio:1.17}.preview.wallpaper img{width:100%;height:100%;object-fit:contain;border-radius:0;box-shadow:none}.hero-art img{border-radius:18px;aspect-ratio:1.29;object-fit:contain}.hero-bottom{justify-content:flex-end}.category-heading{margin-bottom:8px}
 @media(max-width:700px){#collections .cards{grid-template-columns:1fr}.hero-art img{aspect-ratio:auto}.category{margin-bottom:45px}}
 
-/* 角色介紹跟隨頁面自然捲動，不固定、不漸變，只顯示一組插畫。 */
-.character-story{margin:35px 6%;color:var(--muted);font-size:13px}
-.character-stage{position:relative;aspect-ratio:2500/1406;width:100%;overflow:hidden;border-radius:14px;background:#b3e7df;isolation:isolate;--jump:-18px;--hover:-20px;--settle:-3px}
-.character-illustration{position:absolute;inset:0;pointer-events:none}
-.character-layer{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.character-trait{position:absolute;top:87%;margin:0;font-size:clamp(13px,1.3vw,17px);font-weight:500;letter-spacing:2px;line-height:1.6;transform:translateX(-50%);white-space:nowrap}
-.character-dog{left:29%;color:#b66c27}.character-green{left:70%;color:#225b13}
-.is-bouncing .character-layer{animation:character-hop 920ms both}
-.is-bouncing .character-layer:nth-child(1){animation-delay:70ms}
-.is-bouncing .character-layer:nth-child(3){animation-delay:140ms}
-/* 快速跳起，慢速懸停，再快速落地；結尾只留一點回彈。 */
-@keyframes character-hop{
-  0%{transform:translateY(0);animation-timing-function:cubic-bezier(.16,.7,.3,1)}
-  20%{transform:translateY(var(--jump));animation-timing-function:ease-in-out}
-  68%{transform:translateY(var(--hover));animation-timing-function:cubic-bezier(.55,0,.85,.4)}
-  90%{transform:translateY(0);animation-timing-function:ease-out}
-  95%{transform:translateY(var(--settle));animation-timing-function:ease-in}
-  100%{transform:translateY(0)}
-}
-@media(max-width:700px){.character-story{margin:20px 4%}.character-stage{border-radius:9px;--jump:-8px;--hover:-9px;--settle:-1px}.character-trait{font-size:12px;letter-spacing:1px}}
-@media(prefers-reduced-motion:reduce){.is-bouncing .character-layer{animation:none}}
+/* 三個角色各自放在藍色圓圈中，保持獨立、不重疊。 */
+.character-story{margin:45px 6%;font-size:13px;color:var(--muted)}
+.character-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,4vw,64px);max-width:960px;margin:0 auto;padding:20px 0}
+.character-card{min-width:0;text-align:center;color:var(--character-color)}
+.character-portrait{display:flex;align-items:center;justify-content:center;aspect-ratio:1;width:100%;border-radius:50%;overflow:hidden;background:#b3e7df}
+.character-crop{position:relative;overflow:hidden;width:78%}
+.character-crop img{position:absolute;height:auto;max-width:none;display:block}
+.character-name{font-size:clamp(14px,1.7vw,20px);font-weight:500;letter-spacing:1px;margin:18px 0 4px}
+.character-description{font-size:clamp(12px,1.3vw,16px);letter-spacing:1px;margin:0;line-height:1.8}
+.can-reveal .character-card{opacity:0;transform:translateY(28px)}
+.can-reveal.is-visible .character-card{animation:character-card-enter 720ms cubic-bezier(.22,1,.36,1) var(--entry-delay) both}
+@keyframes character-card-enter{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){.character-story{margin:30px 6%}.character-cards{gap:12px;padding:15px 0}.character-name{font-size:14px;margin-top:12px}.character-description{font-size:12px;letter-spacing:0}}
+@media(prefers-reduced-motion:reduce){.can-reveal .character-card{opacity:1;transform:none;animation:none}}
 
 /* 頭貼依色系分區，各區獨立排版，手機與電腦皆為四欄。 */
 .avatar-color-group{margin:0 0 32px}
@@ -358,15 +351,15 @@ window.CONTENT = {
 
 Object.assign(window.CONTENT, {"navAbout": "認識綠綠", "navCollection": "收藏", "navContact": "打聲招呼 ↗", "heroButton": "看一些綠綠的", "heroNote": "", "coverCaption": "綠綠與棉花狗", "heroBottom": "", "scrollHint": "往下逛逛 ↓", "aboutEyebrow": "HELLO, LITTLE GREEN", "collectionEyebrow": "A LITTLE SOMETHING FOR YOU", "contactEyebrow": "LET’S SAY HELLO", "backTop": "回到頂端 ↑"});
 
-// 角色介紹：只顯示有對話框的版本，進入畫面時以快、慢、快的節奏輕跳。
+// 角色介紹：三個獨立圓形頭貼；crop 是原始透明圖中角色的範圍，不修改原圖。
 window.CONTENT.characterStory = {
-  before: ['assets/IMG_6699.PNG', 'assets/IMG_6700.PNG', 'assets/IMG_6698.PNG'],
-  after: ['assets/IMG_6702.PNG', 'assets/未命名的作品 2.png', 'assets/IMG_6701.PNG'],
-  alt: '左側是棉花狗，右側是綠綠的，後方是吐司',
-  label: '認識棉花狗與綠綠的',
+  label: '認識棉花狗、吐司與綠綠的',
   pending: '角色介紹插畫準備中',
-  dog: '活潑好動',
-  green: '沉穩、安靜'
+  cards: [
+    { name: '棉花狗', description: '活潑好動', image: 'assets/IMG_6700.PNG', crop: [344, 754, 713, 423], canvas: [2500, 1406], color: '#b66c27' },
+    { name: '吐司', description: '', image: 'assets/IMG_6699.PNG', crop: [860, 494, 635, 475], canvas: [2500, 1406], color: '#95652e' },
+    { name: '綠綠的', description: '沉穩、安靜', image: 'assets/IMG_6698.PNG', crop: [1204, 655, 1046, 511], canvas: [2500, 1406], color: '#225b13' }
+  ]
 };
 
 window.CONTENT.labels.avatarDownload = "下載 ↓";
@@ -427,39 +420,47 @@ if (typeof c.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email) &&
   const copy = el('button', 'tag', c.labels.copy); copy.type = 'button'; copy.addEventListener('click', async () => { try { await navigator.clipboard.writeText(c.email); document.querySelector('#feedback').textContent = c.labels.copied; } catch { document.querySelector('#feedback').textContent = c.labels.copyFailed; } }); emailArea.append(mail, copy);
 } else emailArea.append(el('span', 'tag pending', c.labels.emailPending));
 
-// 自然捲動，不固定畫面；角色進入視窗時輕跳一次。
+// 三張獨立角色卡片，從左至右交錯向上浮現，頁面維持自然捲動。
 (async function setupCharacterStory() {
   const story = c.characterStory;
   const section = document.querySelector('#character-story');
   if (!story || !section) return;
   section.setAttribute('aria-label', story.label);
   section.textContent = story.pending;
-  const stage = el('div', 'character-stage');
-  const illustration = el('div', 'character-illustration');
-  illustration.setAttribute('role', 'img');
-  illustration.setAttribute('aria-label', story.alt);
-  const layers = story.after.map(src => {
-    const image = el('img', 'character-layer'); image.src = src; image.alt = '';
-    illustration.append(image); return image;
+  const stage = el('div', 'character-cards');
+  const images = [];
+  story.cards.forEach((item, index) => {
+    const card = el('article', 'character-card');
+    card.style.setProperty('--entry-delay', (index * 160) + 'ms');
+    card.style.setProperty('--character-color', item.color);
+    const portrait = el('div', 'character-portrait');
+    const crop = el('div', 'character-crop');
+    const [x, y, width, height] = item.crop;
+    crop.style.aspectRatio = width + ' / ' + height;
+    const image = el('img'); image.src = item.image; image.alt = item.name;
+    image.style.width = (item.canvas[0] / width * 100) + '%';
+    image.style.left = (-x / width * 100) + '%';
+    image.style.top = (-y / height * 100) + '%';
+    crop.append(image); portrait.append(crop); images.push(image);
+    card.append(portrait, el('h3', 'character-name', item.name));
+    if (item.description) card.append(el('p', 'character-description', item.description));
+    stage.append(card);
   });
-  stage.append(illustration, el('p', 'character-trait character-dog', story.dog),
-    el('p', 'character-trait character-green', story.green));
-  try { await Promise.all(layers.map(image => image.decode())); }
+  try { await Promise.all(images.map(image => image.decode())); }
   catch { return; }
-  section.replaceChildren(stage); section.classList.add('is-ready');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const observer = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      if (entry.intersectionRatio >= 0.4) {
-        if (!reduced.matches) stage.classList.add('is-bouncing');
-      } else if (!entry.isIntersecting) {
-        stage.classList.remove('is-bouncing');
+  if (!reduced.matches && 'IntersectionObserver' in window) stage.classList.add('can-reveal');
+  section.replaceChildren(stage); section.classList.add('is-ready');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        stage.classList.add('is-visible'); observer.disconnect();
       }
-    }
-  }, { threshold: [0, 0.4] });
-  observer.observe(stage);
+    }, { threshold: 0.3 });
+    observer.observe(stage);
+  }
   reduced.addEventListener('change', () => {
-    if (reduced.matches) stage.classList.remove('is-bouncing');
+    if (reduced.matches) stage.classList.remove('can-reveal');
   });
 })();
 </script></body></html>
