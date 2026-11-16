@@ -56,6 +56,16 @@
 .wallpaper-entry{opacity:0;transform:translateY(28px)}
 .wallpaper-entry.is-visible{animation:character-card-enter 720ms cubic-bezier(.22,1,.36,1) var(--entry-delay) both}
 @media(prefers-reduced-motion:reduce){.wallpaper-entry{opacity:1;transform:none;animation:none}}
+
+/* 貼圖按原圖每一列裁切顯示，保留完整圖案，不提供預覽圖下載。 */
+#collections #stickers>.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.preview.sticker-sheet{display:block;aspect-ratio:auto;background:#fff}
+.sticker-row{position:relative;overflow:hidden;width:100%}
+.sticker-sheet .sticker-row img{position:absolute;left:0;display:block;width:100%;height:auto;object-fit:fill}
+.can-reveal-row{opacity:0;transform:translateY(20px)}
+.can-reveal-row.is-visible{animation:character-card-enter 650ms cubic-bezier(.22,1,.36,1) var(--row-delay,0ms) both}
+@media(max-width:700px){#collections #stickers>.cards{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.can-reveal-row{opacity:1;transform:none;animation:none}}
 </style></head>
 <body><header class="header"><a class="brand" href="#home" aria-label="綠綠，回到首頁"><span class="brand-mark">✿</span><span data-text="brand"></span></a><nav aria-label="主要導覽"><a href="#about"><span data-text="navAbout"></span></a><a href="#collection"><span data-text="navCollection"></span></a><a href="#contact"><span data-text="navContact"></span></a></nav></header>
 <main><section class="hero" id="home"><div class="hero-copy"><p class="eyebrow" data-text="eyebrow"></p><p class="intro" data-text="intro"></p><a class="pill" href="#collection"><span data-text="heroButton"></span> <span>↘</span></a></div><figure class="hero-art"><img id="cover" width="800" height="620" alt=""><figcaption><span data-text="coverCaption"></span></figcaption></figure><div class="hero-bottom"><span><span data-text="scrollHint"></span></span></div></section>
@@ -72,8 +82,8 @@ window.CONTENT = {
   intro: '歡迎來到綠綠的小角落，\n這裡有綠綠和棉花狗的桌布、頭貼、貼圖',
   cover: { image: 'assets/IMG_5085.JPG', alt: '綠綠與棉花狗一起在水邊休息的插畫' },
   aboutTitle: '你好 我是綠綠的',
-  about: '這裡，是留給綠綠與喜歡綠綠的你的地方。\n一起分享日常的小美好，讓平凡的一天多一點笑容。\n角色的正式介紹準備中，期待很快與你見面。',
-  socials: [{ label: 'Instagram', url: null }, { label: 'Facebook', url: null }],
+  about: '棉花狗、綠綠的和吐司是朋友，常常一起出去玩！希望你能從他們的互動中得到樂趣',
+  socials: [{"label": "Instagram", "url": "https://www.instagram.com/meat628__/"}, {"label": "Threads（脆）", "url": "https://www.threads.com/@meat628__?hl=zh-tw"}],
   collectionTitle: '',
   collectionIntro: '一張頭貼、一幅桌布，或一句貼圖問候。',
   collections: [
@@ -386,8 +396,9 @@ window.CONTENT = {
         "image": "assets/stickers-preview-1.jpg",
         "alt": "綠綠的貼圖 1 整組圖案預覽",
         "storeUrl": "https://store.line.me/stickershop/product/31474161/zh-Hant",
-        "download": "assets/stickers-preview-1.jpg",
-        "fileName": "stickers-preview-1.jpg"
+        "rowCount": 8,
+        "imageWidth": 1080,
+        "imageHeight": 2163
       },
       {
         "title": "綠綠的貼圖 2",
@@ -395,8 +406,9 @@ window.CONTENT = {
         "image": "assets/stickers-preview-2.jpg",
         "alt": "綠綠的貼圖 2 整組圖案預覽",
         "storeUrl": "https://store.line.me/stickershop/product/32869853/zh-Hant",
-        "download": "assets/stickers-preview-2.jpg",
-        "fileName": "stickers-preview-2.jpg"
+        "rowCount": 10,
+        "imageWidth": 1079,
+        "imageHeight": 2734
       }
     ]
   }
@@ -424,12 +436,6 @@ window.CONTENT.characterStory = {
 window.CONTENT.labels.avatarDownload = "下載 ↓";
 window.CONTENT.labels.otherColor = "其他色系";
 
-window.CONTENT.cover.download = window.CONTENT.cover.image;
-window.CONTENT.cover.fileName = 'IMG_5085.JPG';
-for (const character of window.CONTENT.characterStory.cards) {
-  character.download = character.image;
-  character.fileName = character.image.split('/').pop();
-}
 window.CONTENT.labels.downloadOriginal = '下載原圖 ↓';
 window.CONTENT.labels.downloadPreview = '下載預覽圖 ↓';
 
@@ -463,7 +469,6 @@ async function appendDownload(item, container, label, name) {
   link.setAttribute('aria-label', label.replace(' ↓', '') + '：' + name);
   container.append(link);
 }
-appendDownload(c.cover, document.querySelector('.hero-art figcaption'), c.labels.downloadOriginal, c.coverCaption);
 for (const category of c.collections) {
   const section = el('section', 'category'); section.id = category.id;
   const heading = el('div', 'category-heading'); heading.append(el('h3', '', category.title), el('span', '', category.subtitle)); section.append(heading);
@@ -486,9 +491,21 @@ for (const category of c.collections) {
   category.items.forEach(item => {
     const article = el('article', 'card');
     const preview = el('div', 'preview ' + (isWallpaper ? 'wallpaper' : category.id === 'stickers' ? 'sticker' : ''));
-    const img = el('img'); img.src = item.image || 'assets/placeholder.svg'; img.alt = item.alt || item.title; img.loading = 'lazy';
-    img.addEventListener('error', () => { if (!img.src.endsWith('/placeholder.svg')) img.src = 'assets/placeholder.svg'; });
-    preview.append(img); if (!item.image || item.image === bundledAssets['assets/placeholder.svg']) preview.append(el('span', 'badge', c.labels.placeholder));
+    if (category.id === 'stickers' && item.rowCount) {
+      preview.classList.add('sticker-sheet');
+      preview.setAttribute('role', 'img'); preview.setAttribute('aria-label', item.alt);
+      for (let row = 0; row < item.rowCount; row++) {
+        const strip = el('div', 'sticker-row');
+        strip.style.aspectRatio = item.imageWidth + ' / ' + (item.imageHeight / item.rowCount);
+        strip.setAttribute('aria-hidden', 'true');
+        const image = el('img'); image.src = item.image; image.alt = ''; image.loading = 'lazy';
+        image.style.top = (-row * 100) + '%'; strip.append(image); preview.append(strip);
+      }
+    } else {
+      const img = el('img'); img.src = item.image || 'assets/placeholder.svg'; img.alt = item.alt || item.title; img.loading = 'lazy';
+      img.addEventListener('error', () => { if (!img.src.endsWith('/placeholder.svg')) img.src = 'assets/placeholder.svg'; });
+      preview.append(img); if (!item.image || item.image === bundledAssets['assets/placeholder.svg']) preview.append(el('span', 'badge', c.labels.placeholder));
+    }
     const info = el('div', 'card-info'); const words = el('div');
     words.append(el(isGrouped ? 'h5' : 'h4', '', item.title), el('p', '', item.description));
     const actions = el('div', 'card-actions'); actions.append(el('span', 'card-action pending', c.labels.preparing));
@@ -506,7 +523,7 @@ for (const category of c.collections) {
         const link = el('a', 'card-action', c.labels.store); link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer'; actions.append(link);
       }
     }
-    appendDownload(item, actions, isAvatar ? c.labels.avatarDownload : category.id === 'stickers' ? c.labels.downloadPreview : c.labels.download, item.title);
+    if (category.id !== 'stickers') appendDownload(item, actions, isAvatar ? c.labels.avatarDownload : c.labels.download, item.title);
   });
   document.querySelector('#collections').append(section);
 }
@@ -522,6 +539,23 @@ if (!wallpaperMotion.matches && 'IntersectionObserver' in window) {
   wallpaperCards.forEach(card => { card.classList.add('wallpaper-entry'); observer.observe(card); });
   wallpaperMotion.addEventListener('change', () => {
     if (wallpaperMotion.matches) { observer.disconnect(); wallpaperCards.forEach(card => card.classList.remove('wallpaper-entry')); }
+  });
+}
+// 貼圖以原圖切成橫列顯示，按畫面由上到下逐行浮現。
+const stickerMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const stickerRows = document.querySelectorAll('.sticker-row');
+if (!stickerMotion.matches && 'IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    const entering = entries.filter(entry => entry.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left);
+    entering.forEach((entry, index) => {
+      entry.target.style.setProperty('--row-delay', (index * 110) + 'ms');
+      entry.target.classList.add('is-visible'); observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.18 });
+  stickerRows.forEach(row => { row.classList.add('can-reveal-row'); observer.observe(row); });
+  stickerMotion.addEventListener('change', () => {
+    if (stickerMotion.matches) { observer.disconnect(); stickerRows.forEach(row => row.classList.remove('can-reveal-row')); }
   });
 }
 const emailArea = document.querySelector('#email');
@@ -554,7 +588,6 @@ if (typeof c.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email) &&
     crop.append(image); portrait.append(crop); images.push(image);
     card.append(portrait, el('h3', 'character-name', item.name));
     if (item.description) card.append(el('p', 'character-description', item.description));
-    appendDownload(item, card, c.labels.downloadOriginal, item.name);
     stage.append(card);
   });
   try { await Promise.all(images.map(image => image.decode())); }
