@@ -1,0 +1,16 @@
+{
+  "name": "綠綠網站私人預覽",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "綠綠網站預覽",
+      "onAutoForward": "openBrowser",
+      "protocol": "http"
+    }
+  },
+  "postStartCommand": "bash .devcontainer/start-preview.sh",
+  "customizations": {
+    "codespaces": { "openFiles": ["content.js"] }
+  }
+}
