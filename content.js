@@ -215,24 +215,31 @@ window.CONTENT = {
       }
     ]
   },
-  {
-    "id": "stickers",
-    "title": "貼圖",
-    "subtitle": "A LITTLE HELLO",
-    "items": [
-      {
-        "title": "用綠綠說聲嗨",
-        "description": "正式貼圖與官方商店連結準備中",
-        "image": "assets/placeholder.svg",
-        "alt": "貼圖佔位示意插畫",
-        "storeUrl": null
-      }
-    ]
-  }
+{
+  "id": "stickers",
+  "title": "貼圖",
+  "subtitle": "A LITTLE HELLO",
+  "items": [
+    {
+      "title": "綠綠的貼圖 1",
+      "description": "LINE 官方商店",
+      "image": "assets/stickers-preview-1.jpg",
+      "alt": "綠綠的貼圖 1 整組圖案預覽",
+      "storeUrl": "https://store.line.me/stickershop/product/31474161/zh-Hant"
+    },
+    {
+      "title": "綠綠的貼圖 2",
+      "description": "LINE 官方商店",
+      "image": "assets/stickers-preview-2.jpg",
+      "alt": "綠綠的貼圖 2 整組圖案預覽",
+      "storeUrl": "https://store.line.me/stickershop/product/32869853/zh-Hant"
+    }
+  ]
+}
 ],
   contactTitle: '有話想對綠綠說？',
   contactIntro: '合作邀約、喜歡的心情，都歡迎來打聲招呼。',
-  email: null, // 填入真實聯絡信箱後，會出現寄信及複製按鈕。
+  email: 'Jerky628@gmail.com', // 填入真實聯絡信箱後，會出現寄信及複製按鈕。
   footer: '慢慢長大',
   labels: { preparing: '準備中', placeholder: '佔位示意・非正式素材', download: '下載素材 ↓', store: '前往官方商店 ↗', emailPending: '聯絡信箱準備中', copy: '複製信箱', copied: '信箱已複製！', copyFailed: '無法自動複製，請選取上方信箱複製。' }
 };
