@@ -22,7 +22,7 @@ async function appendDownload(item, container, label, name) {
 }
 for (const category of c.collections) {
   const section = el('section', 'category'); section.id = category.id;
-  const heading = el('div', 'category-heading'); heading.append(el('h3', '', category.title), el('span', '', category.subtitle)); section.append(heading);
+  const heading = el('div', 'category-heading'); heading.append(el('h3', '', category.title)); if (category.subtitle) heading.append(el('span', '', category.subtitle)); section.append(heading);
   const isAvatar = category.id === 'avatars';
   const isWallpaper = category.id === 'wallpapers';
   const isGrouped = isAvatar || isWallpaper;
@@ -71,7 +71,7 @@ for (const category of c.collections) {
       const url = webUrl(item.storeUrl);
       if (url) {
         actions.querySelector('.pending').remove();
-        const link = el('a', 'card-action', c.labels.store); link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer'; actions.append(link);
+        const link = el('a', 'card-action store-button', c.labels.store); link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer'; actions.append(link);
       }
     }
     if (category.id !== 'stickers') appendDownload(item, actions, isAvatar ? c.labels.avatarDownload : c.labels.download, item.title);

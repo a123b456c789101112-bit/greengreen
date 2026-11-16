@@ -65,3 +65,13 @@
 .can-reveal-row.is-visible{animation:character-card-enter 650ms cubic-bezier(.22,1,.36,1) var(--row-delay,0ms) both}
 @media(max-width:700px){#collections #stickers>.cards{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.can-reveal-row{opacity:1;transform:none;animation:none}}
+
+/* 從綠綠原畫取色，讓商店與社群入口更明顯。 */
+:root{--character-green:#bcc253;--button-ink:#234227}
+.header .brand{letter-spacing:1px}
+.about{grid-template-columns:minmax(0,1fr) 110px}
+#socials a.tag{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--character-green);color:var(--button-ink);border:1px solid var(--character-green);padding:9px 20px;font-size:13px;font-weight:600}
+#stickers .store-button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:11px 22px;border-radius:28px;background:var(--character-green);color:var(--button-ink);font-size:14px;font-weight:700;line-height:1.6;box-shadow:0 3px 0 #8d943929}
+#socials a.tag:hover,#stickers .store-button:hover{filter:brightness(.95);text-decoration:none}
+#stickers .card-info{align-items:center}
+@media(max-width:700px){.about{grid-template-columns:1fr}.header .brand{font-size:17px}#stickers .card-info{display:block}#stickers .card-actions{margin-top:12px}#stickers .store-button{width:100%;min-height:50px}}
