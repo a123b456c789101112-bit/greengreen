@@ -13,14 +13,29 @@ async function availableFile(path) {
 for (const category of c.collections) {
   const section = el('section', 'category'); section.id = category.id;
   const heading = el('div', 'category-heading'); heading.append(el('h3', '', category.title), el('span', '', category.subtitle)); section.append(heading);
-  const cards = el('div', 'cards'); section.append(cards);
+  const isAvatar = category.id === 'avatars';
+  const cards = el('div', isAvatar ? 'avatar-groups' : 'cards'); section.append(cards);
+  const groupedCards = new Map();
+  function addGroup(id, title) {
+    const group = el('section', 'avatar-color-group');
+    group.append(el('h4', 'color-heading', title));
+    const grid = el('div', 'cards'); group.append(grid); cards.append(group);
+    groupedCards.set(id, grid);
+  }
+  if (isAvatar) for (const group of category.colorGroups || []) {
+    if (category.items.some(item => item.colorGroup === group.id)) addGroup(group.id, group.title);
+  }
   for (const item of category.items) {
     const article = el('article', 'card'); const preview = el('div', 'preview ' + (category.id === 'wallpapers' ? 'wallpaper' : category.id === 'stickers' ? 'sticker' : ''));
     const img = el('img'); img.src = item.image || 'assets/placeholder.svg'; img.alt = item.alt || item.title; img.loading = 'lazy'; img.addEventListener('error', () => { if (!img.src.endsWith('/placeholder.svg')) img.src = 'assets/placeholder.svg'; });
     preview.append(img); if (!item.image || item.image.includes('placeholder.svg')) preview.append(el('span', 'badge', c.labels.placeholder));
-    const info = el('div', 'card-info'); const words = el('div'); words.append(el('h4', '', item.title), el('p', '', item.description)); const action = el('span', 'card-action pending', c.labels.preparing); info.append(words, action); article.append(preview, info); cards.append(article);
+    const info = el('div', 'card-info'); const words = el('div'); words.append(el(isAvatar ? 'h5' : 'h4', '', item.title), el('p', '', item.description)); const action = el('span', 'card-action pending', c.labels.preparing); info.append(words, action); article.append(preview, info);
+    if (isAvatar) {
+      if (!groupedCards.has(item.colorGroup)) addGroup(item.colorGroup, c.labels.otherColor);
+      groupedCards.get(item.colorGroup).append(article);
+    } else cards.append(article);
     if (category.id === 'stickers') { const url = webUrl(item.storeUrl); if (url) { const a = el('a', 'card-action', c.labels.store); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; action.replaceWith(a); } }
-    else availableFile(item.download).then(url => { if (url) { const a = el('a', 'card-action', c.labels.download); a.href = url; a.download = ''; action.replaceWith(a); } });
+    else availableFile(item.download).then(url => { if (url) { const a = el('a', 'card-action', isAvatar ? c.labels.avatarDownload : c.labels.download); a.href = url; a.download = ''; a.setAttribute('aria-label', '下載' + item.title); action.replaceWith(a); } });
   }
   document.querySelector('#collections').append(section);
 }

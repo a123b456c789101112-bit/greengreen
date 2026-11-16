@@ -26,3 +26,21 @@
 }
 @media(max-width:700px){.character-story{margin:20px 4%}.character-stage{border-radius:9px;--jump:-8px;--hover:-9px;--settle:-1px}.character-trait{font-size:12px;letter-spacing:1px}}
 @media(prefers-reduced-motion:reduce){.is-bouncing .character-layer{animation:none}}
+
+/* 頭貼依色系分區，各區獨立排版，手機與電腦皆為四欄。 */
+.avatar-color-group{margin:0 0 32px}
+.color-heading{font-size:13px;letter-spacing:1px;font-weight:500;color:var(--muted);margin:10px 0 16px}
+#collections #avatars .cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+#avatars .card h5{margin:0;font-size:14px;font-weight:500}
+#avatars .card-info{display:block;margin:10px 0 0}
+#avatars .card-action{display:inline-flex;align-items:center;min-height:44px}
+@media(max-width:700px){
+  #collections #avatars .cards{gap:8px}
+  #avatars .preview{border-radius:6px;aspect-ratio:1}
+  #avatars .card h5{font-size:11px;line-height:1.5}
+  #avatars .card-info{margin-top:7px}
+  #avatars .card-info p{display:none}
+  #avatars .card-action{font-size:11px;padding:4px 2px;min-height:44px}
+  .avatar-color-group{margin-bottom:24px}
+  .color-heading{font-size:12px;margin:8px 0 12px}
+}

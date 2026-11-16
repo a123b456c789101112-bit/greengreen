@@ -22,154 +22,194 @@ window.CONTENT = {
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5110.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 01",
-        "download": "assets/IMG_5110.JPG"
+        "download": "assets/IMG_5110.JPG",
+        "colorGroup": "warm"
       },
       {
         "title": "頭貼 02",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5113.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 02",
-        "download": "assets/IMG_5113.JPG"
+        "download": "assets/IMG_5113.JPG",
+        "colorGroup": "purple"
       },
       {
         "title": "頭貼 03",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5114.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 03",
-        "download": "assets/IMG_5114.JPG"
+        "download": "assets/IMG_5114.JPG",
+        "colorGroup": "warm"
       },
       {
         "title": "頭貼 04",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5115.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 04",
-        "download": "assets/IMG_5115.JPG"
+        "download": "assets/IMG_5115.JPG",
+        "colorGroup": "warm"
       },
       {
         "title": "頭貼 05",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5475.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 05",
-        "download": "assets/IMG_5475.JPG"
+        "download": "assets/IMG_5475.JPG",
+        "colorGroup": "blue"
       },
       {
         "title": "頭貼 06",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5476.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 06",
-        "download": "assets/IMG_5476.JPG"
+        "download": "assets/IMG_5476.JPG",
+        "colorGroup": "blue"
       },
       {
         "title": "頭貼 07",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5477.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 07",
-        "download": "assets/IMG_5477.JPG"
+        "download": "assets/IMG_5477.JPG",
+        "colorGroup": "blue"
       },
       {
         "title": "頭貼 08",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5478.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 08",
-        "download": "assets/IMG_5478.JPG"
+        "download": "assets/IMG_5478.JPG",
+        "colorGroup": "blue"
       },
       {
         "title": "頭貼 09",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5479.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 09",
-        "download": "assets/IMG_5479.JPG"
+        "download": "assets/IMG_5479.JPG",
+        "colorGroup": "blue"
       },
       {
         "title": "頭貼 10",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5481.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 10",
-        "download": "assets/IMG_5481.JPG"
+        "download": "assets/IMG_5481.JPG",
+        "colorGroup": "blue"
       },
       {
         "title": "頭貼 11",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5813.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 11",
-        "download": "assets/IMG_5813.JPG"
+        "download": "assets/IMG_5813.JPG",
+        "colorGroup": "cream"
       },
       {
         "title": "頭貼 12",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5815.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 12",
-        "download": "assets/IMG_5815.JPG"
+        "download": "assets/IMG_5815.JPG",
+        "colorGroup": "cream"
       },
       {
         "title": "頭貼 13",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5973.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 13",
-        "download": "assets/IMG_5973.JPG"
+        "download": "assets/IMG_5973.JPG",
+        "colorGroup": "cream"
       },
       {
         "title": "頭貼 14",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_5976.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 14",
-        "download": "assets/IMG_5976.JPG"
+        "download": "assets/IMG_5976.JPG",
+        "colorGroup": "cream"
       },
       {
         "title": "頭貼 15",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_6059.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 15",
-        "download": "assets/IMG_6059.JPG"
+        "download": "assets/IMG_6059.JPG",
+        "colorGroup": "cream"
       },
       {
         "title": "頭貼 16",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_6060.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 16",
-        "download": "assets/IMG_6060.JPG"
+        "download": "assets/IMG_6060.JPG",
+        "colorGroup": "cream"
       },
       {
         "title": "頭貼 17",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_6061.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 17",
-        "download": "assets/IMG_6061.JPG"
+        "download": "assets/IMG_6061.JPG",
+        "colorGroup": "cream"
       },
       {
         "title": "頭貼 18",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_6062.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 18",
-        "download": "assets/IMG_6062.JPG"
+        "download": "assets/IMG_6062.JPG",
+        "colorGroup": "cream"
       },
       {
         "title": "頭貼 19",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_6063.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 19",
-        "download": "assets/IMG_6063.JPG"
+        "download": "assets/IMG_6063.JPG",
+        "colorGroup": "cream"
       },
       {
         "title": "頭貼 20",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_6419 2.jpg",
         "alt": "綠綠與棉花狗插畫頭貼 20",
-        "download": "assets/IMG_6419 2.jpg"
+        "download": "assets/IMG_6419 2.jpg",
+        "colorGroup": "warm"
       },
       {
         "title": "頭貼 21",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_6419.jpg",
         "alt": "綠綠與棉花狗插畫頭貼 21",
-        "download": "assets/IMG_6419.jpg"
+        "download": "assets/IMG_6419.jpg",
+        "colorGroup": "warm"
       },
       {
         "title": "頭貼 22",
         "description": "2048 × 2048 · JPG",
         "image": "assets/IMG_6521.JPG",
         "alt": "綠綠與棉花狗插畫頭貼 22",
-        "download": "assets/IMG_6521.JPG"
+        "download": "assets/IMG_6521.JPG",
+        "colorGroup": "cream"
+      }
+    ],
+    "colorGroups": [
+      {
+        "id": "warm",
+        "title": "暖橘・鵝黃"
+      },
+      {
+        "id": "blue",
+        "title": "天空藍"
+      },
+      {
+        "id": "purple",
+        "title": "深紫"
+      },
+      {
+        "id": "cream",
+        "title": "奶油白"
       }
     ]
   },
@@ -215,27 +255,27 @@ window.CONTENT = {
       }
     ]
   },
-{
-  "id": "stickers",
-  "title": "貼圖",
-  "subtitle": "A LITTLE HELLO",
-  "items": [
-    {
-      "title": "綠綠的貼圖 1",
-      "description": "LINE 官方商店",
-      "image": "assets/stickers-preview-1.jpg",
-      "alt": "綠綠的貼圖 1 整組圖案預覽",
-      "storeUrl": "https://store.line.me/stickershop/product/31474161/zh-Hant"
-    },
-    {
-      "title": "綠綠的貼圖 2",
-      "description": "LINE 官方商店",
-      "image": "assets/stickers-preview-2.jpg",
-      "alt": "綠綠的貼圖 2 整組圖案預覽",
-      "storeUrl": "https://store.line.me/stickershop/product/32869853/zh-Hant"
-    }
-  ]
-}
+  {
+    "id": "stickers",
+    "title": "貼圖",
+    "subtitle": "A LITTLE HELLO",
+    "items": [
+      {
+        "title": "綠綠的貼圖 1",
+        "description": "LINE 官方商店",
+        "image": "assets/stickers-preview-1.jpg",
+        "alt": "綠綠的貼圖 1 整組圖案預覽",
+        "storeUrl": "https://store.line.me/stickershop/product/31474161/zh-Hant"
+      },
+      {
+        "title": "綠綠的貼圖 2",
+        "description": "LINE 官方商店",
+        "image": "assets/stickers-preview-2.jpg",
+        "alt": "綠綠的貼圖 2 整組圖案預覽",
+        "storeUrl": "https://store.line.me/stickershop/product/32869853/zh-Hant"
+      }
+    ]
+  }
 ],
   contactTitle: '有話想對綠綠說？',
   contactIntro: '合作邀約、喜歡的心情，都歡迎來打聲招呼。',
@@ -256,3 +296,6 @@ window.CONTENT.characterStory = {
   dog: '活潑好動',
   green: '沉穩、安靜'
 };
+
+window.CONTENT.labels.avatarDownload = "下載 ↓";
+window.CONTENT.labels.otherColor = "其他色系";
