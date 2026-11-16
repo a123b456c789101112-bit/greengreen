@@ -239,7 +239,7 @@ window.CONTENT = {
 
 Object.assign(window.CONTENT, {"navAbout": "認識綠綠", "navCollection": "收藏", "navContact": "打聲招呼 ↗", "heroButton": "看一些綠綠的", "heroNote": "", "coverCaption": "綠綠與棉花狗", "heroBottom": "", "scrollHint": "往下逛逛 ↓", "aboutEyebrow": "HELLO, LITTLE GREEN", "collectionEyebrow": "A LITTLE SOMETHING FOR YOU", "contactEyebrow": "LET’S SAY HELLO", "backTop": "回到頂端 ↑"});
 
-// 角色介紹：兩張原圖需保持相同比例與角色位置，方便捲動時柔順銜接。
+// 角色介紹：只顯示有對話框的版本，進入畫面時以快、慢、快的節奏輕跳。
 window.CONTENT.characterStory = {
   before: ['assets/IMG_6699.PNG', 'assets/IMG_6700.PNG', 'assets/IMG_6698.PNG'],
   after: ['assets/IMG_6702.PNG', 'assets/未命名的作品 2.png', 'assets/IMG_6701.PNG'],

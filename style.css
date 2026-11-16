@@ -5,19 +5,24 @@
 #collections{display:block}#collections .cards{grid-template-columns:repeat(3,minmax(0,1fr))}.preview{aspect-ratio:1}.preview.wallpaper{aspect-ratio:1.17}.preview.wallpaper img{width:100%;height:100%;object-fit:contain;border-radius:0;box-shadow:none}.hero-art img{border-radius:18px;aspect-ratio:1.29;object-fit:contain}.hero-bottom{justify-content:flex-end}.category-heading{margin-bottom:8px}
 @media(max-width:700px){#collections .cards{grid-template-columns:1fr}.hero-art img{aspect-ratio:auto}.category{margin-bottom:45px}}
 
-/* 捲動角色介紹：先淡出再淡入，文字固定在各角色下方。 */
-.character-story{margin:0 6%;color:var(--muted);font-size:13px}
-.character-story.is-ready{height:155vh;min-height:850px;position:relative;margin-top:35px;margin-bottom:35px}
-.character-stage{position:sticky;top:12vh;aspect-ratio:16/9;width:100%;overflow:hidden;border-radius:14px;background:#b3e7df;--reveal:0;--lift:12px}
-.character-stage img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.character-after{opacity:var(--reveal);will-change:opacity}
-.character-trait{position:absolute;top:87%;margin:0;font-size:clamp(13px,1.3vw,17px);font-weight:500;letter-spacing:2px;line-height:1.6;opacity:var(--reveal);transform:translate(-50%,var(--lift));white-space:nowrap;will-change:opacity,transform}
+/* 角色介紹跟隨頁面自然捲動，不固定、不漸變，只顯示一組插畫。 */
+.character-story{margin:35px 6%;color:var(--muted);font-size:13px}
+.character-stage{position:relative;aspect-ratio:2500/1406;width:100%;overflow:hidden;border-radius:14px;background:#b3e7df;isolation:isolate;--jump:-18px;--hover:-20px;--settle:-3px}
+.character-illustration{position:absolute;inset:0;pointer-events:none}
+.character-layer{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.character-trait{position:absolute;top:87%;margin:0;font-size:clamp(13px,1.3vw,17px);font-weight:500;letter-spacing:2px;line-height:1.6;transform:translateX(-50%);white-space:nowrap}
 .character-dog{left:29%;color:#b66c27}.character-green{left:70%;color:#225b13}
-@media(max-width:700px){.character-story{margin-left:4%;margin-right:4%}.character-story.is-ready{height:110vh;min-height:650px;margin-top:15px;margin-bottom:15px}.character-stage{top:24vh;border-radius:9px}.character-trait{font-size:12px;letter-spacing:1px}}
-@media(prefers-reduced-motion:reduce){.character-story.is-ready{height:auto;min-height:0}.character-stage{position:relative;top:auto;--reveal:1!important;--lift:0px!important}}
-
-.character-before,.character-after{position:absolute;inset:0}.character-stage{aspect-ratio:2500/1406}
-.character-before{opacity:calc(1 - var(--reveal));will-change:opacity}
-
-.character-stage{isolation:isolate}
-.character-before,.character-after{pointer-events:none;contain:paint;transform:translateZ(0)}
+.is-bouncing .character-layer{animation:character-hop 920ms both}
+.is-bouncing .character-layer:nth-child(1){animation-delay:70ms}
+.is-bouncing .character-layer:nth-child(3){animation-delay:140ms}
+/* 快速跳起，慢速懸停，再快速落地；結尾只留一點回彈。 */
+@keyframes character-hop{
+  0%{transform:translateY(0);animation-timing-function:cubic-bezier(.16,.7,.3,1)}
+  20%{transform:translateY(var(--jump));animation-timing-function:ease-in-out}
+  68%{transform:translateY(var(--hover));animation-timing-function:cubic-bezier(.55,0,.85,.4)}
+  90%{transform:translateY(0);animation-timing-function:ease-out}
+  95%{transform:translateY(var(--settle));animation-timing-function:ease-in}
+  100%{transform:translateY(0)}
+}
+@media(max-width:700px){.character-story{margin:20px 4%}.character-stage{border-radius:9px;--jump:-8px;--hover:-9px;--settle:-1px}.character-trait{font-size:12px;letter-spacing:1px}}
+@media(prefers-reduced-motion:reduce){.is-bouncing .character-layer{animation:none}}
