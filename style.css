@@ -44,3 +44,9 @@
   .avatar-color-group{margin-bottom:24px}
   .color-heading{font-size:12px;margin:8px 0 12px}
 }
+
+/* 封面佔半個螢幕高，上緣柔順融入網站底色。 */
+.hero-art{position:relative}
+.hero-art::after{content:"";position:absolute;top:0;left:0;right:0;height:42%;background:linear-gradient(to bottom,var(--cream) 0%,rgba(248,247,238,.8) 24%,rgba(248,247,238,0) 100%);pointer-events:none}
+.hero-art img{height:50vh;height:50svh;aspect-ratio:auto;object-fit:cover;border-radius:0;background:var(--cream)}
+@media(max-width:700px){.hero-art{width:100vw;max-width:none;margin-left:calc(50% - 50vw);margin-right:0}.hero-art img{height:50vh;height:50svh}.hero-art figcaption{padding:0 6%}}

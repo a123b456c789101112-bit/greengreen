@@ -4,7 +4,7 @@ window.CONTENT = {
   brand: '綠綠',
   eyebrow: 'LITTLE GREEN, cotton dog',
   title: '',
-  intro: '歡迎來到綠綠的小角落，這裡有綠綠和棉花狗的桌布、頭貼、貼圖',
+  intro: '歡迎來到綠綠的小角落，\n這裡有綠綠和棉花狗的桌布、頭貼、貼圖',
   cover: { image: 'assets/IMG_5085.JPG', alt: '綠綠與棉花狗一起在水邊休息的插畫' },
   aboutTitle: '你好 我是綠綠的',
   about: '這裡，是留給綠綠與喜歡綠綠的你的地方。\n一起分享日常的小美好，讓平凡的一天多一點笑容。\n角色的正式介紹準備中，期待很快與你見面。',
@@ -24,6 +24,14 @@ window.CONTENT = {
         "alt": "綠綠與棉花狗插畫頭貼 01",
         "download": "assets/IMG_5110.JPG",
         "colorGroup": "warm"
+      },
+      {
+        "title": "頭貼 23",
+        "description": "2048 × 2048 · JPG",
+        "image": "assets/IMG_5107.JPG",
+        "alt": "棉花狗戴著橘色耳罩，深紫色背景的頭貼",
+        "download": "assets/IMG_5107.JPG",
+        "colorGroup": "purple"
       },
       {
         "title": "頭貼 02",
@@ -175,7 +183,7 @@ window.CONTENT = {
         "image": "assets/IMG_6419 2.jpg",
         "alt": "綠綠與棉花狗插畫頭貼 20",
         "download": "assets/IMG_6419 2.jpg",
-        "colorGroup": "warm"
+        "colorGroup": "yellow"
       },
       {
         "title": "頭貼 21",
@@ -183,7 +191,7 @@ window.CONTENT = {
         "image": "assets/IMG_6419.jpg",
         "alt": "綠綠與棉花狗插畫頭貼 21",
         "download": "assets/IMG_6419.jpg",
-        "colorGroup": "warm"
+        "colorGroup": "yellow"
       },
       {
         "title": "頭貼 22",
@@ -197,7 +205,11 @@ window.CONTENT = {
     "colorGroups": [
       {
         "id": "warm",
-        "title": "暖橘・鵝黃"
+        "title": "暖橘"
+      },
+      {
+        "id": "yellow",
+        "title": "鵝黃"
       },
       {
         "id": "blue",
