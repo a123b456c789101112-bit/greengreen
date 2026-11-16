@@ -20,7 +20,6 @@ async function appendDownload(item, container, label, name) {
   link.setAttribute('aria-label', label.replace(' ↓', '') + '：' + name);
   container.append(link);
 }
-appendDownload(c.cover, document.querySelector('.hero-art figcaption'), c.labels.downloadOriginal, c.coverCaption);
 for (const category of c.collections) {
   const section = el('section', 'category'); section.id = category.id;
   const heading = el('div', 'category-heading'); heading.append(el('h3', '', category.title), el('span', '', category.subtitle)); section.append(heading);
@@ -43,9 +42,21 @@ for (const category of c.collections) {
   category.items.forEach(item => {
     const article = el('article', 'card');
     const preview = el('div', 'preview ' + (isWallpaper ? 'wallpaper' : category.id === 'stickers' ? 'sticker' : ''));
-    const img = el('img'); img.src = item.image || 'assets/placeholder.svg'; img.alt = item.alt || item.title; img.loading = 'lazy';
-    img.addEventListener('error', () => { if (!img.src.endsWith('/placeholder.svg')) img.src = 'assets/placeholder.svg'; });
-    preview.append(img); if (!item.image || item.image.includes('placeholder.svg')) preview.append(el('span', 'badge', c.labels.placeholder));
+    if (category.id === 'stickers' && item.rowCount) {
+      preview.classList.add('sticker-sheet');
+      preview.setAttribute('role', 'img'); preview.setAttribute('aria-label', item.alt);
+      for (let row = 0; row < item.rowCount; row++) {
+        const strip = el('div', 'sticker-row');
+        strip.style.aspectRatio = item.imageWidth + ' / ' + (item.imageHeight / item.rowCount);
+        strip.setAttribute('aria-hidden', 'true');
+        const image = el('img'); image.src = item.image; image.alt = ''; image.loading = 'lazy';
+        image.style.top = (-row * 100) + '%'; strip.append(image); preview.append(strip);
+      }
+    } else {
+      const img = el('img'); img.src = item.image || 'assets/placeholder.svg'; img.alt = item.alt || item.title; img.loading = 'lazy';
+      img.addEventListener('error', () => { if (!img.src.endsWith('/placeholder.svg')) img.src = 'assets/placeholder.svg'; });
+      preview.append(img); if (!item.image || item.image.includes('placeholder.svg')) preview.append(el('span', 'badge', c.labels.placeholder));
+    }
     const info = el('div', 'card-info'); const words = el('div');
     words.append(el(isGrouped ? 'h5' : 'h4', '', item.title), el('p', '', item.description));
     const actions = el('div', 'card-actions'); actions.append(el('span', 'card-action pending', c.labels.preparing));
@@ -63,7 +74,7 @@ for (const category of c.collections) {
         const link = el('a', 'card-action', c.labels.store); link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer'; actions.append(link);
       }
     }
-    appendDownload(item, actions, isAvatar ? c.labels.avatarDownload : category.id === 'stickers' ? c.labels.downloadPreview : c.labels.download, item.title);
+    if (category.id !== 'stickers') appendDownload(item, actions, isAvatar ? c.labels.avatarDownload : c.labels.download, item.title);
   });
   document.querySelector('#collections').append(section);
 }
@@ -79,6 +90,23 @@ if (!wallpaperMotion.matches && 'IntersectionObserver' in window) {
   wallpaperCards.forEach(card => { card.classList.add('wallpaper-entry'); observer.observe(card); });
   wallpaperMotion.addEventListener('change', () => {
     if (wallpaperMotion.matches) { observer.disconnect(); wallpaperCards.forEach(card => card.classList.remove('wallpaper-entry')); }
+  });
+}
+// 貼圖以原圖切成橫列顯示，按畫面由上到下逐行浮現。
+const stickerMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const stickerRows = document.querySelectorAll('.sticker-row');
+if (!stickerMotion.matches && 'IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    const entering = entries.filter(entry => entry.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left);
+    entering.forEach((entry, index) => {
+      entry.target.style.setProperty('--row-delay', (index * 110) + 'ms');
+      entry.target.classList.add('is-visible'); observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.18 });
+  stickerRows.forEach(row => { row.classList.add('can-reveal-row'); observer.observe(row); });
+  stickerMotion.addEventListener('change', () => {
+    if (stickerMotion.matches) { observer.disconnect(); stickerRows.forEach(row => row.classList.remove('can-reveal-row')); }
   });
 }
 const emailArea = document.querySelector('#email');
@@ -111,7 +139,6 @@ if (typeof c.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email) &&
     crop.append(image); portrait.append(crop); images.push(image);
     card.append(portrait, el('h3', 'character-name', item.name));
     if (item.description) card.append(el('p', 'character-description', item.description));
-    appendDownload(item, card, c.labels.downloadOriginal, item.name);
     stage.append(card);
   });
   try { await Promise.all(images.map(image => image.decode())); }

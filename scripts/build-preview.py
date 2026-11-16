@@ -3,6 +3,7 @@ from pathlib import Path
 import base64
 import json
 import mimetypes
+import re
 import sys
 from zipfile import ZipFile, ZIP_DEFLATED
 
@@ -32,6 +33,7 @@ app = app.replace("item.image.includes('placeholder.svg')", "item.image === bund
 script = 'const bundledAssets = ' + json.dumps(assets, ensure_ascii=False) + ';\n' + content + hydrate + app
 script = script.replace('</script', '<\\/script')
 html = (root / 'index.html').read_text()
+html = re.sub(r'(href="style\.css|src="(?:content|app)\.js)\?[^"]*', r'\1', html)
 html = html.replace('<link rel="stylesheet" href="style.css">', '<style>' + (root / 'style.css').read_text() + '</style>')
 html = html.replace('<script src="content.js" defer></script><script src="app.js" defer></script>', '')
 html = html.replace('</body>', '<script>' + script + '</script></body>')

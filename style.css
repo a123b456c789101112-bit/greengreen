@@ -55,3 +55,13 @@
 .wallpaper-entry{opacity:0;transform:translateY(28px)}
 .wallpaper-entry.is-visible{animation:character-card-enter 720ms cubic-bezier(.22,1,.36,1) var(--entry-delay) both}
 @media(prefers-reduced-motion:reduce){.wallpaper-entry{opacity:1;transform:none;animation:none}}
+
+/* 貼圖按原圖每一列裁切顯示，保留完整圖案，不提供預覽圖下載。 */
+#collections #stickers>.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.preview.sticker-sheet{display:block;aspect-ratio:auto;background:#fff}
+.sticker-row{position:relative;overflow:hidden;width:100%}
+.sticker-sheet .sticker-row img{position:absolute;left:0;display:block;width:100%;height:auto;object-fit:fill}
+.can-reveal-row{opacity:0;transform:translateY(20px)}
+.can-reveal-row.is-visible{animation:character-card-enter 650ms cubic-bezier(.22,1,.36,1) var(--row-delay,0ms) both}
+@media(max-width:700px){#collections #stickers>.cards{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.can-reveal-row{opacity:1;transform:none;animation:none}}
