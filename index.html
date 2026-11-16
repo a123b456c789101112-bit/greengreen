@@ -6,22 +6,27 @@
 #collections{display:block}#collections .cards{grid-template-columns:repeat(3,minmax(0,1fr))}.preview{aspect-ratio:1}.preview.wallpaper{aspect-ratio:1.17}.preview.wallpaper img{width:100%;height:100%;object-fit:contain;border-radius:0;box-shadow:none}.hero-art img{border-radius:18px;aspect-ratio:1.29;object-fit:contain}.hero-bottom{justify-content:flex-end}.category-heading{margin-bottom:8px}
 @media(max-width:700px){#collections .cards{grid-template-columns:1fr}.hero-art img{aspect-ratio:auto}.category{margin-bottom:45px}}
 
-/* 捲動角色介紹：先淡出再淡入，文字固定在各角色下方。 */
-.character-story{margin:0 6%;color:var(--muted);font-size:13px}
-.character-story.is-ready{height:155vh;min-height:850px;position:relative;margin-top:35px;margin-bottom:35px}
-.character-stage{position:sticky;top:12vh;aspect-ratio:16/9;width:100%;overflow:hidden;border-radius:14px;background:#b3e7df;--reveal:0;--lift:12px}
-.character-stage img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.character-after{opacity:var(--reveal);will-change:opacity}
-.character-trait{position:absolute;top:87%;margin:0;font-size:clamp(13px,1.3vw,17px);font-weight:500;letter-spacing:2px;line-height:1.6;opacity:var(--reveal);transform:translate(-50%,var(--lift));white-space:nowrap;will-change:opacity,transform}
+/* 角色介紹跟隨頁面自然捲動，不固定、不漸變，只顯示一組插畫。 */
+.character-story{margin:35px 6%;color:var(--muted);font-size:13px}
+.character-stage{position:relative;aspect-ratio:2500/1406;width:100%;overflow:hidden;border-radius:14px;background:#b3e7df;isolation:isolate;--jump:-18px;--hover:-20px;--settle:-3px}
+.character-illustration{position:absolute;inset:0;pointer-events:none}
+.character-layer{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.character-trait{position:absolute;top:87%;margin:0;font-size:clamp(13px,1.3vw,17px);font-weight:500;letter-spacing:2px;line-height:1.6;transform:translateX(-50%);white-space:nowrap}
 .character-dog{left:29%;color:#b66c27}.character-green{left:70%;color:#225b13}
-@media(max-width:700px){.character-story{margin-left:4%;margin-right:4%}.character-story.is-ready{height:110vh;min-height:650px;margin-top:15px;margin-bottom:15px}.character-stage{top:24vh;border-radius:9px}.character-trait{font-size:12px;letter-spacing:1px}}
-@media(prefers-reduced-motion:reduce){.character-story.is-ready{height:auto;min-height:0}.character-stage{position:relative;top:auto;--reveal:1!important;--lift:0px!important}}
-
-.character-before,.character-after{position:absolute;inset:0}.character-stage{aspect-ratio:2500/1406}
-.character-before{opacity:calc(1 - var(--reveal));will-change:opacity}
-
-.character-stage{isolation:isolate}
-.character-before,.character-after{pointer-events:none;contain:paint;transform:translateZ(0)}
+.is-bouncing .character-layer{animation:character-hop 920ms both}
+.is-bouncing .character-layer:nth-child(1){animation-delay:70ms}
+.is-bouncing .character-layer:nth-child(3){animation-delay:140ms}
+/* 快速跳起，慢速懸停，再快速落地；結尾只留一點回彈。 */
+@keyframes character-hop{
+  0%{transform:translateY(0);animation-timing-function:cubic-bezier(.16,.7,.3,1)}
+  20%{transform:translateY(var(--jump));animation-timing-function:ease-in-out}
+  68%{transform:translateY(var(--hover));animation-timing-function:cubic-bezier(.55,0,.85,.4)}
+  90%{transform:translateY(0);animation-timing-function:ease-out}
+  95%{transform:translateY(var(--settle));animation-timing-function:ease-in}
+  100%{transform:translateY(0)}
+}
+@media(max-width:700px){.character-story{margin:20px 4%}.character-stage{border-radius:9px;--jump:-8px;--hover:-9px;--settle:-1px}.character-trait{font-size:12px;letter-spacing:1px}}
+@media(prefers-reduced-motion:reduce){.is-bouncing .character-layer{animation:none}}
 </style></head>
 <body><header class="header"><a class="brand" href="#home" aria-label="綠綠，回到首頁"><span class="brand-mark">✿</span><span data-text="brand"></span></a><nav aria-label="主要導覽"><a href="#about"><span data-text="navAbout"></span></a><a href="#collection"><span data-text="navCollection"></span></a><a href="#contact"><span data-text="navContact"></span></a></nav></header>
 <main><section class="hero" id="home"><div class="hero-copy"><p class="eyebrow" data-text="eyebrow"></p><p class="intro" data-text="intro"></p><a class="pill" href="#collection"><span data-text="heroButton"></span> <span>↘</span></a></div><figure class="hero-art"><img id="cover" width="800" height="620" alt=""><figcaption><span data-text="coverCaption"></span></figcaption></figure><div class="hero-bottom"><span><span data-text="scrollHint"></span></span></div></section>
@@ -270,7 +275,7 @@ window.CONTENT = {
 
 Object.assign(window.CONTENT, {"navAbout": "認識綠綠", "navCollection": "收藏", "navContact": "打聲招呼 ↗", "heroButton": "看一些綠綠的", "heroNote": "", "coverCaption": "綠綠與棉花狗", "heroBottom": "", "scrollHint": "往下逛逛 ↓", "aboutEyebrow": "HELLO, LITTLE GREEN", "collectionEyebrow": "A LITTLE SOMETHING FOR YOU", "contactEyebrow": "LET’S SAY HELLO", "backTop": "回到頂端 ↑"});
 
-// 角色介紹：兩張原圖需保持相同比例與角色位置，方便捲動時柔順銜接。
+// 角色介紹：只顯示有對話框的版本，進入畫面時以快、慢、快的節奏輕跳。
 window.CONTENT.characterStory = {
   before: ['assets/IMG_6699.PNG', 'assets/IMG_6700.PNG', 'assets/IMG_6698.PNG'],
   after: ['assets/IMG_6702.PNG', 'assets/未命名的作品 2.png', 'assets/IMG_6701.PNG'],
@@ -321,7 +326,7 @@ if (typeof c.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email) &&
   const copy = el('button', 'tag', c.labels.copy); copy.type = 'button'; copy.addEventListener('click', async () => { try { await navigator.clipboard.writeText(c.email); document.querySelector('#feedback').textContent = c.labels.copied; } catch { document.querySelector('#feedback').textContent = c.labels.copyFailed; } }); emailArea.append(mail, copy);
 } else emailArea.append(el('span', 'tag pending', c.labels.emailPending));
 
-// 跟隨捲動柔順淡出、淡入；兩個版本不會同時可見。
+// 自然捲動，不固定畫面；角色進入視窗時輕跳一次。
 (async function setupCharacterStory() {
   const story = c.characterStory;
   const section = document.querySelector('#character-story');
@@ -329,61 +334,31 @@ if (typeof c.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email) &&
   section.setAttribute('aria-label', story.label);
   section.textContent = story.pending;
   const stage = el('div', 'character-stage');
-  const before = el('div', 'character-before');
-  const after = el('div', 'character-after');
-  after.setAttribute('aria-hidden', 'true');
-  const layers = [];
-  for (const [group, sources] of [[before, story.before], [after, story.after]]) {
-    for (const src of sources) {
-      const image = el('img'); image.src = src; image.alt = '';
-      group.append(image); layers.push(image);
-    }
-  }
-  before.setAttribute('role', 'img'); before.setAttribute('aria-label', story.alt);
-  const dog = el('p', 'character-trait character-dog', story.dog);
-  const green = el('p', 'character-trait character-green', story.green);
-  stage.append(before, after, dog, green);
+  const illustration = el('div', 'character-illustration');
+  illustration.setAttribute('role', 'img');
+  illustration.setAttribute('aria-label', story.alt);
+  const layers = story.after.map(src => {
+    const image = el('img', 'character-layer'); image.src = src; image.alt = '';
+    illustration.append(image); return image;
+  });
+  stage.append(illustration, el('p', 'character-trait character-dog', story.dog),
+    el('p', 'character-trait character-green', story.green));
   try { await Promise.all(layers.map(image => image.decode())); }
-  catch { return; } // 原圖尚未上傳時不顯示破圖，也不占用長捲動空間。
+  catch { return; }
   section.replaceChildren(stage); section.classList.add('is-ready');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let frame = 0;
-  let lastTime = 0;
-  let displayed = null;
-  let start = 0;
-  let distance = 1;
-  const clamp = value => Math.min(1, Math.max(0, value));
-  const smooth = value => value * value * (3 - 2 * value);
-  function measure() {
-    const top = parseFloat(getComputedStyle(stage).top) || 0;
-    start = section.getBoundingClientRect().top + scrollY - top;
-    distance = Math.max(1, section.offsetHeight - stage.offsetHeight - top);
-    schedule();
-  }
-  function update(now) {
-    frame = 0;
-    const target = reduced.matches ? 1 : clamp(((scrollY - start) / distance - 0.12) / 0.68);
-    const elapsed = Math.min(64, lastTime ? now - lastTime : 16);
-    lastTime = now;
-    // 用時間平滑滾輪或觸控的大步跳動，不修改頁面原本的捲動方式。
-    if (displayed === null || reduced.matches) displayed = target;
-    else displayed += (target - displayed) * (1 - Math.exp(-elapsed / 110));
-    if (Math.abs(target - displayed) < 0.0005) displayed = target;
-    // 前半段只淡出，後半段才淡入，不再額外停留空白。
-    const outgoing = 1 - smooth(clamp(displayed * 2));
-    const incoming = smooth(clamp((displayed - 0.5) * 2));
-    before.style.opacity = outgoing.toFixed(4);
-    after.style.opacity = incoming.toFixed(4);
-    stage.style.setProperty('--reveal', incoming.toFixed(4));
-    stage.style.setProperty('--lift', ((1 - incoming) * 8).toFixed(2) + 'px');
-    if (displayed !== target) schedule();
-    else lastTime = 0;
-  }
-  function schedule() { if (!frame) frame = requestAnimationFrame(update); }
-  addEventListener('scroll', schedule, { passive: true });
-  addEventListener('resize', measure);
-  reduced.addEventListener('change', measure);
-  new ResizeObserver(measure).observe(section);
-  measure();
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.intersectionRatio >= 0.4) {
+        if (!reduced.matches) stage.classList.add('is-bouncing');
+      } else if (!entry.isIntersecting) {
+        stage.classList.remove('is-bouncing');
+      }
+    }
+  }, { threshold: [0, 0.4] });
+  observer.observe(stage);
+  reduced.addEventListener('change', () => {
+    if (reduced.matches) stage.classList.remove('is-bouncing');
+  });
 })();
 </script></body></html>
